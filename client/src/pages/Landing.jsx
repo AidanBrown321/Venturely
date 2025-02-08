@@ -18,10 +18,11 @@ const Landing = () => {
             destination <span>tracking</span> app
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-            tempore vero eligendi asperiores, provident eos officiis dignissimos
-            voluptatum fugiat maiores inventore, rerum accusamus soluta quod
-            illo dolore, aliquam id! Voluptatem?
+            Discover new destinations and keep track of your travel experiences
+            with this innovative app. Whether you're planning your next
+            adventure or reminiscing about past trips, the app provides all the
+            tools you need to make the most of your journeys. Join the community
+            of explorers and start your travel journey today!
           </p>
           <Link to="/register" className="btn register-link">
             Register
