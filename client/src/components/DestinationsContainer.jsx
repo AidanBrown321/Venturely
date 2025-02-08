@@ -16,8 +16,7 @@ const DestinationsContainer = () => {
   return (
     <Wrapper>
       <h5>
-        {totalDestinations} destination{totalDestinations.length > 1 && "s"}{" "}
-        found
+        {totalDestinations} destination{totalDestinations > 1 && "s"} found
       </h5>
       <div className="destinations">
         {destinations.map((destination) => {

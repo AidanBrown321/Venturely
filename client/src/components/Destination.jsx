@@ -21,7 +21,7 @@ const Destination = ({
   return (
     <Wrapper>
       <header>
-        <div className="main-icon">{country.charAt(0)}</div>
+        <div className="main-icon">{name.charAt(0)}</div>
         <div className="info">
           <h5>{name}</h5>
           <p>{country}</p>
@@ -32,9 +32,12 @@ const Destination = ({
           <DestinationInfo icon={<FaLocationArrow />} text={name} />
           <DestinationInfo icon={<FaCalendarAlt />} text={date} />
           <DestinationInfo icon={<FaBriefcase />} text={destinationType} />
-          <div className={`status ${destinationStatus}`}>
-            {destinationStatus}
-          </div>
+          {destinationStatus === "yes" && (
+            <div className={`status ${destinationStatus}`}>I have been</div>
+          )}
+          {destinationStatus === "no" && (
+            <div className={`status ${destinationStatus}`}>I want to go</div>
+          )}
         </div>
         <footer className="actions">
           <Link to={`../edit-destination/${_id}`} className="btn edit-btn">
