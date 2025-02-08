@@ -30,35 +30,24 @@ const AddDestination = () => {
         <div className="form-center">
           <FormRow type="text" name="country" />
           <FormRow type="text" name="name" labelText="city" />
-          <FormRow
-            type="text"
-            labelText="state"
-            name="admin1"
-            defaultValue={"idaho"}
-          />
-          <FormRow
-            type="text"
-            labelText="latitude"
-            name="lat"
-            defaultValue={"100"}
-          />
-          <FormRow
-            type="text"
-            labelText="longitude"
-            name="lon"
-            defaultValue={"200"}
-          />
           <FormRowSelect
             labelText="Have you visited this destination?"
             name="destinationStatus"
             defaultValue={DESTINATION_STATUS.WANT}
-            list={Object.values(DESTINATION_STATUS)}
+            list={[
+              { name: "I want to go", value: DESTINATION_STATUS.WANT },
+              { name: "I have been", value: DESTINATION_STATUS.BEEN },
+            ]}
           />
           <FormRowSelect
             labelText="destination type"
             name="destinationType"
             defaultValue={DESTINATION_TYPE.RESORT}
-            list={Object.values(DESTINATION_TYPE)}
+            list={[
+              { name: "Resort", value: DESTINATION_TYPE.RESORT },
+              { name: "City", value: DESTINATION_TYPE.CITY },
+              { name: "Nature", value: DESTINATION_TYPE.NATURE },
+            ]}
           />
           <SubmitBtn formBtn />
         </div>

@@ -55,6 +55,9 @@ export const getAllDestinations = async (req, res) => {
 
 export const createDestination = async (req, res) => {
   req.body.createdBy = req.user.userId;
+  req.body.admin1 = "idaho";
+  req.body.lat = "100";
+  req.body.lon = "200";
   const destination = await Destination.create(req.body);
   res.status(StatusCodes.CREATED).json({ destination });
 };

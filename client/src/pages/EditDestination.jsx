@@ -44,35 +44,24 @@ const EditDestination = () => {
             labelText="city"
             defaultValue={destination.country}
           />
-          <FormRow
-            type="text"
-            name="admin1"
-            labelText="state"
-            defaultValue={destination.admin1}
-          />
-          <FormRow
-            type="text"
-            name="lat"
-            labelText="latitude"
-            defaultValue={destination.lat}
-          />
-          <FormRow
-            type="text"
-            name="lon"
-            labelText="longitude"
-            defaultValue={destination.lon}
-          />
           <FormRowSelect
             name="destinationStatus"
             labelText="Have you visited this destination?"
             defaultValue={destination.destinationStatus}
-            list={Object.values(DESTINATION_STATUS)}
+            list={[
+              { name: "I want to go", value: DESTINATION_STATUS.WANT },
+              { name: "I have been", value: DESTINATION_STATUS.BEEN },
+            ]}
           />
           <FormRowSelect
             name="destinationType"
             labelText="destination type"
             defaultValue={destination.destinationType}
-            list={Object.values(DESTINATION_TYPE)}
+            list={[
+              { name: "Resort", value: DESTINATION_TYPE.RESORT },
+              { name: "City", value: DESTINATION_TYPE.CITY },
+              { name: "Nature", value: DESTINATION_TYPE.NATURE },
+            ]}
           />
           <SubmitBtn formBtn />
         </div>

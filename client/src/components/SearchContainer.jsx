@@ -39,7 +39,11 @@ const SearchContainer = () => {
           <FormRowSelect
             labelText="destination status"
             name="destinationStatus"
-            list={["all", ...Object.values(DESTINATION_STATUS)]}
+            list={[
+              { name: "all", value: "all" },
+              { name: "I want to go", value: DESTINATION_STATUS.WANT },
+              { name: "I have been", value: DESTINATION_STATUS.BEEN },
+            ]}
             defaultValue={destinationStatus}
             onChange={(e) => {
               submit(e.currentTarget.form);
@@ -48,7 +52,12 @@ const SearchContainer = () => {
           <FormRowSelect
             labelText="destination type"
             name="destinationType"
-            list={["all", ...Object.values(DESTINATION_TYPE)]}
+            list={[
+              { name: "all", value: "all" },
+              { name: "Resort", value: DESTINATION_TYPE.RESORT },
+              { name: "City", value: DESTINATION_TYPE.CITY },
+              { name: "Nature", value: DESTINATION_TYPE.NATURE },
+            ]}
             defaultValue={destinationType}
             onChange={(e) => {
               submit(e.currentTarget.form);
@@ -57,7 +66,12 @@ const SearchContainer = () => {
           <FormRowSelect
             name="sort"
             defaultValue={sort}
-            list={[...Object.values(DESTINATION_SORT_BY)]}
+            list={[
+              { name: "newest", value: DESTINATION_SORT_BY.NEWEST },
+              { name: "oldest", value: DESTINATION_SORT_BY.OLDEST },
+              { name: "a-z", value: DESTINATION_SORT_BY.ASCENDING },
+              { name: "z-a", value: DESTINATION_SORT_BY.DESCENDING },
+            ]}
             onChange={(e) => {
               submit(e.currentTarget.form);
             }}
