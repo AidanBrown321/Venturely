@@ -37,12 +37,16 @@ const EditDestination = () => {
       <Form method="post" className="form">
         <h4 className="form-title">edit destination</h4>
         <div className="form-center">
-          <FormRow type="text" name="country" defaultValue={destination.name} />
+          <FormRow
+            type="text"
+            name="country"
+            defaultValue={destination.country}
+          />
           <FormRow
             type="text"
             name="name"
             labelText="city"
-            defaultValue={destination.country}
+            defaultValue={destination.name}
           />
           <FormRowSelect
             name="destinationStatus"
