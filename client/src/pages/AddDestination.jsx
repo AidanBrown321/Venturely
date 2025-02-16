@@ -5,6 +5,8 @@ import { DESTINATION_STATUS, DESTINATION_TYPE } from "../../../utils/constants";
 import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
+import React, { useState } from "react";
+import Select from "react-select";
 
 export const loader = async ({ request }) => {
   const params = Object.fromEntries([
@@ -47,7 +49,7 @@ const AddDestination = () => {
 
   const formValues = searchDestinations.map((destination) => {
     return {
-      name: destination.name + ", " + destination.country,
+      label: destination.name + ", " + destination.country,
       value: destination._id,
     };
   });
@@ -59,11 +61,16 @@ const AddDestination = () => {
       <Form method="post" className="form">
         <h4 className="form-title">add destination</h4>
         <div className="form-center">
-          <FormRowSelect
+          {/* <FormRowSelect
             labelText="location"
             name="id"
             defaultValue="all"
             list={formValues}
+          /> */}
+          <Select
+            className="form-row"
+            options={formValues}
+            defaultValue={formValues[0]}
           />
           <FormRowSelect
             labelText="Have you visited this destination?"
