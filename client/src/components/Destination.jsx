@@ -29,7 +29,7 @@ const Destination = ({
       </header>
       <div className="content">
         <div className="content-center">
-          <DestinationInfo icon={<FaLocationArrow />} text={name} />
+          <DestinationInfo icon={<FaLocationArrow />} text={admin1} />
           <DestinationInfo icon={<FaCalendarAlt />} text={date} />
           <DestinationInfo icon={<FaBriefcase />} text={destinationType} />
           {destinationStatus === "yes" && (

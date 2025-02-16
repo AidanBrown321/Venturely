@@ -65,7 +65,6 @@ const AddDestination = () => {
             defaultValue="all"
             list={formValues}
           />
-          {/* <FormRow type="text" name="name" labelText="city" /> */}
           <FormRowSelect
             labelText="Have you visited this destination?"
             name="destinationStatus"

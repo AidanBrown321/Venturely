@@ -87,6 +87,7 @@ export const createDestination = async (req, res) => {
   req.body.createdBy = req.user.userId;
   req.body.name = newDestination.name;
   req.body.country = newDestination.country;
+  req.body.admin1 = newDestination.admin1;
   req.body.lat = newDestination.lat;
   req.body.lon = newDestination.lon;
 
