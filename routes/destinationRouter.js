@@ -3,6 +3,7 @@ const router = Router();
 
 import {
   getAllDestinations,
+  getSearchDestinations,
   getDestination,
   createDestination,
   updateDestination,
@@ -24,6 +25,8 @@ router
   .post(checkForTestUser, validateDestinationInput, createDestination);
 
 router.route("/stats").get(showStats);
+
+router.route("/search").get(getSearchDestinations);
 
 router
   .route("/:id")

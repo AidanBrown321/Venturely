@@ -2,6 +2,7 @@ import Destination from "../models/DestinationModel.js";
 import { StatusCodes } from "http-status-codes";
 import mongoose from "mongoose";
 import day from "dayjs";
+import AllDestinations from "../client/src/pages/AllDestinations.jsx";
 
 export const getAllDestinations = async (req, res) => {
   const { search, destinationStatus, destinationType, sort } = req.query;
@@ -51,6 +52,30 @@ export const getAllDestinations = async (req, res) => {
   res
     .status(StatusCodes.OK)
     .json({ totalDestinations, numOfPages, currentPage: page, destinations });
+};
+
+export const getSearchDestinations = async (req, res) => {
+  const { search } = req.query;
+
+  const queryObject = {};
+
+  if (search) {
+    queryObject.$or = [
+      { name: { $regex: search, $options: "i" } },
+      { country: { $regex: search, $options: "i" } },
+      { countryCode: { $regex: search, $options: "i" } },
+    ];
+  }
+
+  // Setup pagination
+
+  const limit = Number(req.query.limit) || 10;
+
+  const searchDestinations = await AllDestinations.find(queryObject).limit(
+    limit
+  );
+
+  res.status(StatusCodes.OK).json({ searchDestinations });
 };
 
 export const createDestination = async (req, res) => {
