@@ -2,7 +2,7 @@ import Destination from "../models/DestinationModel.js";
 import { StatusCodes } from "http-status-codes";
 import mongoose from "mongoose";
 import day from "dayjs";
-import AllDestinations from "../client/src/pages/AllDestinations.jsx";
+import AllDestinations from "../models/AllDestinationsModel.js";
 
 export const getAllDestinations = async (req, res) => {
   const { search, destinationStatus, destinationType, sort } = req.query;
@@ -55,11 +55,14 @@ export const getAllDestinations = async (req, res) => {
 };
 
 export const getSearchDestinations = async (req, res) => {
-  const { search } = req.query;
+  const { country } = req.query;
+  console.log(req.query);
 
-  const queryObject = {};
+  const queryObject = {
+    admin1: "idaho",
+  };
 
-  if (search) {
+  if (country && country !== "all") {
     queryObject.$or = [
       { name: { $regex: search, $options: "i" } },
       { country: { $regex: search, $options: "i" } },
@@ -71,18 +74,22 @@ export const getSearchDestinations = async (req, res) => {
 
   const limit = Number(req.query.limit) || 10;
 
-  const searchDestinations = await AllDestinations.find(queryObject).limit(
-    limit
-  );
+  const searchDestinations = await AllDestinations.find({
+    admin1: "Idaho",
+  }).limit(limit);
 
   res.status(StatusCodes.OK).json({ searchDestinations });
 };
 
 export const createDestination = async (req, res) => {
+  console.log(req.body);
+  const newDestination = await AllDestinations.findById(req.body.id);
   req.body.createdBy = req.user.userId;
-  req.body.admin1 = "idaho";
-  req.body.lat = "100";
-  req.body.lon = "200";
+  req.body.name = newDestination.name;
+  req.body.country = newDestination.country;
+  req.body.lat = newDestination.lat;
+  req.body.lon = newDestination.lon;
+
   const destination = await Destination.create(req.body);
   res.status(StatusCodes.CREATED).json({ destination });
 };

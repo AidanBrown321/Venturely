@@ -18,6 +18,7 @@ import { action as registerAction } from "./pages/Register";
 import { action as loginAction } from "./pages/Login";
 import { loader as dashboardLoader } from "./pages/DashboardLayout";
 import { action as addDestinationAction } from "./pages/AddDestination";
+import { loader as addDestinationLoader } from "./pages/AddDestination";
 import { loader as allDestinationsLoader } from "./pages/AllDestinations";
 import { loader as editDestinationLoader } from "./pages/EditDestination";
 import { action as editDestinationAction } from "./pages/EditDestination";
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
             index: true,
             element: <AddDestination />,
             action: addDestinationAction,
+            loader: addDestinationLoader,
           },
           {
             path: "stats",

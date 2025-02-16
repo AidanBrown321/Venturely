@@ -1,29 +1,31 @@
 import { FormRow, FormRowSelect, SubmitBtn } from "../components";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
-import { useOutletContext } from "react-router-dom";
+import { useLoaderData, useOutletContext } from "react-router-dom";
 import { DESTINATION_STATUS, DESTINATION_TYPE } from "../../../utils/constants";
 import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
 
-// export const loader = async ({ request }) => {
-//   const params = Object.fromEntries([
-//     ...new URL(request.url).searchParams.entries(),
-//   ]);
+export const loader = async ({ request }) => {
+  const params = Object.fromEntries([
+    ...new URL(request.url).searchParams.entries(),
+  ]);
 
-//   try {
-//     const { data } = await customFetch.get("/destinations", {
-//       params,
-//     });
-//     return {
-//       data,
-//       searchValues: { ...params },
-//     };
-//   } catch (error) {
-//     toast.error(error?.response?.data?.msg);
-//     return error;
-//   }
-// };
+  try {
+    console.log(params);
+    const { data } = await customFetch.get("/destinations/search", {
+      params,
+    });
+
+    return {
+      data,
+      searchValues: { ...params },
+    };
+  } catch (error) {
+    toast.error(error?.response?.data?.msg);
+    return error;
+  }
+};
 
 export const action = async ({ request }) => {
   const formData = await request.formData();
@@ -40,15 +42,30 @@ export const action = async ({ request }) => {
 };
 
 const AddDestination = () => {
-  const { user } = useOutletContext();
+  const { data, searchValues } = useLoaderData();
+  const { searchDestinations } = data;
+
+  const formValues = searchDestinations.map((destination) => {
+    return {
+      name: destination.name + ", " + destination.country,
+      value: destination._id,
+    };
+  });
+
+  console.log(formValues);
 
   return (
     <Wrapper>
       <Form method="post" className="form">
         <h4 className="form-title">add destination</h4>
         <div className="form-center">
-          <FormRow type="text" name="country" />
-          <FormRow type="text" name="name" labelText="city" />
+          <FormRowSelect
+            labelText="location"
+            name="id"
+            defaultValue="all"
+            list={formValues}
+          />
+          {/* <FormRow type="text" name="name" labelText="city" /> */}
           <FormRowSelect
             labelText="Have you visited this destination?"
             name="destinationStatus"

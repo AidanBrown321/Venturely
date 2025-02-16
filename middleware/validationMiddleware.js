@@ -30,11 +30,7 @@ const withValidationErrors = (validateValues) => {
 };
 
 export const validateDestinationInput = withValidationErrors([
-  body("name").notEmpty().withMessage("name is required"),
-  body("country").notEmpty().withMessage("country is required"),
-  // body("admin1").notEmpty().withMessage("state is required"),
-  // body("lat").notEmpty().withMessage("lat is required"),
-  // body("lon").notEmpty().withMessage("lon is required"),
+  body("id").notEmpty().withMessage("location is required"),
   body("destinationStatus")
     .isIn(Object.values(DESTINATION_STATUS))
     .withMessage("invalid status value"),
