@@ -30,6 +30,20 @@ const Wrapper = styled.section`
     display: grid;
     place-items: center;
   }
+
+  .custom-option {
+    transition: background 60ms;
+  }
+  .custom-option:hover {
+    transition-delay: 60ms;
+    background: #deebff;
+  }
+  .custom-option.custom-select__option--is-focused {
+    background: none;
+  }
+  .custom-option.custom-select__option--is-selected {
+    background: #2684ff;
+  }
   @media (min-width: 992px) {
     .form-center {
       grid-template-columns: 1fr 1fr;

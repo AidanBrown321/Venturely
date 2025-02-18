@@ -1,4 +1,9 @@
-import { FormRow, FormRowSelect, SubmitBtn } from "../components";
+import {
+  AsyncSelector,
+  FormRow,
+  FormRowSelect,
+  SubmitBtn,
+} from "../components";
 import Wrapper from "../assets/wrappers/DashboardFormPage";
 import { useLoaderData, useOutletContext } from "react-router-dom";
 import { DESTINATION_STATUS, DESTINATION_TYPE } from "../../../utils/constants";
@@ -6,7 +11,7 @@ import { Form, redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import customFetch from "../utils/customFetch";
 import React, { useState } from "react";
-import Select from "react-select";
+import Async, { useAsync } from "react-select/async";
 
 export const loader = async ({ request }) => {
   const params = Object.fromEntries([
@@ -46,6 +51,7 @@ export const action = async ({ request }) => {
 const AddDestination = () => {
   const { data, searchValues } = useLoaderData();
   const { searchDestinations } = data;
+  const [selectedOption, setSelectedOption] = useState("");
 
   const formValues = searchDestinations.map((destination) => {
     return {
@@ -54,7 +60,9 @@ const AddDestination = () => {
     };
   });
 
-  console.log(formValues);
+  const handleChange = (selectedOption) => {
+    setSelectedOption(selectedOption);
+  };
 
   return (
     <Wrapper>
@@ -67,11 +75,16 @@ const AddDestination = () => {
             defaultValue="all"
             list={formValues}
           /> */}
-          <Select
-            className="form-row"
+          {/* <AsyncSelect
+            name="id"
+            onChange={handleChange}
             options={formValues}
             defaultValue={formValues[0]}
-          />
+            filterOption={createFilter({ ignoreAccents: false })}
+            classNamePrefix="custom-select"
+            components={{Option: CustomOption}}
+          /> */}
+          <AsyncSelector name="id" />
           <FormRowSelect
             labelText="Have you visited this destination?"
             name="destinationStatus"

@@ -55,28 +55,27 @@ export const getAllDestinations = async (req, res) => {
 };
 
 export const getSearchDestinations = async (req, res) => {
-  const { country } = req.query;
-  console.log(req.query);
+  const { input } = req.query;
 
-  const queryObject = {
-    admin1: "idaho",
-  };
+  const queryObject = {};
 
-  if (country && country !== "all") {
+  if (input && input !== "all") {
     queryObject.$or = [
-      { name: { $regex: search, $options: "i" } },
-      { country: { $regex: search, $options: "i" } },
-      { countryCode: { $regex: search, $options: "i" } },
+      { name: { $regex: input, $options: "i" } },
+      { country: { $regex: input, $options: "i" } },
+      { countryCode: { $regex: input, $options: "i" } },
     ];
+  } else if (input === "all") {
+    queryObject.country = "United States";
   }
 
   // Setup pagination
 
-  const limit = Number(req.query.limit) || 10;
+  const limit = Number(req.query.limit) || 400;
 
-  const searchDestinations = await AllDestinations.find({
-    admin1: "Idaho",
-  }).limit(limit);
+  const searchDestinations = await AllDestinations.find(queryObject).limit(
+    limit
+  );
 
   res.status(StatusCodes.OK).json({ searchDestinations });
 };
