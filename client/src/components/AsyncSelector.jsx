@@ -3,10 +3,8 @@ import AsyncSelect from "react-select/async";
 import customFetch from "../utils/customFetch";
 import { useSubmit } from "react-router-dom";
 
-const AsyncReactSelect = () => {
+const AsyncReactSelect = ({ onValueChange }) => {
   const [selectedValue, setSelectedValue] = useState(null);
-  const submit = useSubmit();
-
   const loadOptions = async (params, callback) => {
     console.log(params);
     try {
@@ -35,6 +33,7 @@ const AsyncReactSelect = () => {
 
   const handleChange = (option) => {
     setSelectedValue(option);
+    onValueChange(option.value);
   };
 
   return (
@@ -48,9 +47,7 @@ const AsyncReactSelect = () => {
         onChange={handleChange}
         placeholder="Search for a location..."
         value={selectedValue}
-        onBlur={() => submit({ destination: selectedValue.value })}
       />
-      {selectedValue && <p>You selected: {selectedValue.label}</p>}
     </div>
   );
 };

@@ -53,15 +53,8 @@ const AddDestination = () => {
   const { searchDestinations } = data;
   const [selectedOption, setSelectedOption] = useState("");
 
-  const formValues = searchDestinations.map((destination) => {
-    return {
-      label: destination.name + ", " + destination.country,
-      value: destination._id,
-    };
-  });
-
-  const handleChange = (selectedOption) => {
-    setSelectedOption(selectedOption);
+  const handleValueChange = (value) => {
+    setSelectedOption(value);
   };
 
   return (
@@ -75,16 +68,12 @@ const AddDestination = () => {
             defaultValue="all"
             list={formValues}
           /> */}
-          {/* <AsyncSelect
+          <AsyncSelector
             name="id"
-            onChange={handleChange}
-            options={formValues}
-            defaultValue={formValues[0]}
-            filterOption={createFilter({ ignoreAccents: false })}
-            classNamePrefix="custom-select"
-            components={{Option: CustomOption}}
-          /> */}
-          <AsyncSelector name="id" />
+            value={selectedOption}
+            onValueChange={handleValueChange}
+          />
+          <input type="hidden" name="id" value={selectedOption} />
           <FormRowSelect
             labelText="Have you visited this destination?"
             name="destinationStatus"
