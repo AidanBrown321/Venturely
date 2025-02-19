@@ -11,3 +11,4 @@ export { default as SubmitBtn } from "./SubmitBtn";
 export { default as ChartsContainer } from "./ChartsContainer";
 export { default as StatsContainer } from "./StatsContainer";
 export { default as AsyncSelector } from "./AsyncSelector";
+export { default as Map } from "./Map";
